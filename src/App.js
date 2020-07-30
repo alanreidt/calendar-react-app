@@ -21,7 +21,7 @@ const DAY_NAMES = [
 function App(props) {
   const [sundayTasks, ...restTasks] = props.weekTasks;
   const weekTasksLocalized = [...restTasks, sundayTasks];
-  const todayDayIndex = moment().day();
+  const todayDayIndex = (moment().day() + 6) % DAY_NAMES.length;
 
   return (
     <div className="App">
