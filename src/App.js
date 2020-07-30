@@ -2,6 +2,8 @@ import React from 'react';
 import { Tabs } from 'antd';
 import moment from 'moment';
 
+import Box from './components/Box/Box';
+
 import './App.css';
 
 const { TabPane } = Tabs;
@@ -26,11 +28,17 @@ function App(props) {
       <Tabs defaultActiveKey={`${todayDayIndex}`} tabPosition="right">
         {weekTasksLocalized.map((dayTasks, i) => {
           const indexLocalized = (i + 1) % DAY_NAMES.length;
+          const dayName = DAY_NAMES[indexLocalized];
+          const style = {
+            padding: 20,
+          };
 
           return (
-            <TabPane tab={DAY_NAMES[indexLocalized]} key={i}>
-              Content of tab {i}
-              {dayTasks[0] && dayTasks[0].name}
+            <TabPane style={style} tab={dayName} key={i}>
+              <Box dayTasks={dayTasks} >
+                <div>Awesome</div>
+                <div>Super</div>
+              </Box>
             </TabPane>
           )
         })}
