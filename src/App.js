@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from 'antd';
+import { Tabs, List } from 'antd';
 import moment from 'moment';
 
 import Box from './components/Box/Box';
@@ -35,9 +35,18 @@ function App(props) {
 
           return (
             <TabPane style={style} tab={dayName} key={i}>
-              <Box dayTasks={dayTasks} >
-                <div>Awesome</div>
-                <div>Super</div>
+              <Box>
+                <List
+                  header={<div>Header</div>}
+                  footer={<div>Footer</div>}
+                  bordered
+                  dataSource={dayTasks}
+                  renderItem={(dayTask) => (
+                    <List.Item>
+                      {dayTask.time} {dayTask.name}
+                    </List.Item>
+                  )}
+                />
               </Box>
             </TabPane>
           )
