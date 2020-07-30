@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, List } from 'antd';
+import { Tabs, List, Input, TimePicker } from 'antd';
 import moment from 'moment';
 
 import Box from './components/Box/Box';
@@ -17,6 +17,7 @@ const DAY_NAMES = [
   'Пт',
   'Сб',
 ];
+const TIME_FORMAT = "HH:mm";
 
 function App(props) {
   const [sundayTasks, ...restTasks] = props.weekTasks;
@@ -43,7 +44,11 @@ function App(props) {
                   dataSource={dayTasks}
                   renderItem={(dayTask) => (
                     <List.Item>
-                      {dayTask.time} {dayTask.name}
+                      <TimePicker
+                        defaultValue={moment(dayTask.time, TIME_FORMAT)}
+                        format={TIME_FORMAT}
+                      />
+                      <Input defaultValue={dayTask.name} placeholder="Введите задачу" allowClear />
                     </List.Item>
                   )}
                 />
