@@ -17,18 +17,23 @@ const DAY_NAMES = [
 ];
 
 function App(props) {
-  const weekTasks = props.weekTasks;
+  const [sundayTasks, ...restTasks] = props.weekTasks;
+  const weekTasksLocalized = [...restTasks, sundayTasks];
   const todayDayIndex = moment().day();
 
   return (
     <div className="App">
       <Tabs defaultActiveKey={`${todayDayIndex}`} tabPosition="right">
-        {weekTasks.map((dayTasks, i) => (
-          <TabPane tab={DAY_NAMES[i]} key={i}>
-            Content of tab {i}
-            {dayTasks[0] && dayTasks[0].name}
-          </TabPane>
-        ))}
+        {weekTasksLocalized.map((dayTasks, i) => {
+          const indexLocalized = (i + 1) % DAY_NAMES.length;
+
+          return (
+            <TabPane tab={DAY_NAMES[indexLocalized]} key={i}>
+              Content of tab {i}
+              {dayTasks[0] && dayTasks[0].name}
+            </TabPane>
+          )
+        })}
       </Tabs>
     </div>
   );
