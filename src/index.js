@@ -3,23 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import moment from 'moment';
+
+const TIME_FORMAT = "HH:mm";
 
 const WEEK_TASKS = [
   [],
   [
-    { name: "Пробежка", time: "08:00" },
-    { name: "Завтрак", time: "09:00" },
-    { name: "Совещание", time: "12:00" },
+    { name: "Пробежка", time: moment("08:00", TIME_FORMAT) },
+    { name: "Завтрак", time: moment("09:00", TIME_FORMAT) },
+    { name: "Совещание", time: moment("12:00", TIME_FORMAT) },
   ],
   [],
   [
-    { name: "Завтрак", time: "09:00" },
-    { name: "Спортзал", time: "19:00" },
+    { name: "Завтрак", time: moment("09:00", TIME_FORMAT) },
+    { name: "Спортзал", time: moment("19:00", TIME_FORMAT) },
   ],
   [],
   [
-    { name: "Обед", time: "13:30" },
-    { name: "Скайпкол", time: "17:40" },
+    { name: "Обед", time: moment("13:30", TIME_FORMAT) },
+    { name: "Скайпкол", time: moment("17:40", TIME_FORMAT) },
   ],
   [],
 ];
