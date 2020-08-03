@@ -1,8 +1,9 @@
 import React from 'react';
-import { Tabs, List, Input, TimePicker } from 'antd';
 import moment from 'moment';
+import { Tabs } from 'antd';
 
 import Box from './components/Box/Box';
+import TaskList from './components/TaskList/TaskList';
 
 import './App.css';
 
@@ -17,10 +18,9 @@ const DAY_NAMES = [
   'Пт',
   'Сб',
 ];
-const TIME_FORMAT = "HH:mm";
 
-function App(props) {
-  const [sundayTasks, ...restTasks] = props.weekTasks;
+function App({ weekTasks }) {
+  const [sundayTasks, ...restTasks] = weekTasks;
   const weekTasksLocalized = [...restTasks, sundayTasks];
   const todayDayIndex = (moment().day() + 6) % DAY_NAMES.length;
 
@@ -37,21 +37,7 @@ function App(props) {
           return (
             <TabPane style={style} tab={dayName} key={i}>
               <Box>
-                <List
-                  header={<div>Header</div>}
-                  footer={<div>Footer</div>}
-                  bordered
-                  dataSource={dayTasks}
-                  renderItem={(dayTask) => (
-                    <List.Item>
-                      <TimePicker
-                        defaultValue={moment(dayTask.time, TIME_FORMAT)}
-                        format={TIME_FORMAT}
-                      />
-                      <Input defaultValue={dayTask.name} placeholder="Введите задачу" allowClear />
-                    </List.Item>
-                  )}
-                />
+                <TaskList initialTasks={dayTasks} />
               </Box>
             </TabPane>
           )
