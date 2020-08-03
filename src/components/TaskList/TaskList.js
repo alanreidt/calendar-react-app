@@ -5,9 +5,11 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const TIME_FORMAT = "HH:mm";
 
-const TaskList = ({ initialTasks = [] }) => {
+const TaskList = ({ initialTasks = [], handleFinish, index }) => {
   const onFinish = ({ tasks }) => {
-    console.log(JSON.stringify(tasks, null, 2));
+    const sortedTasks = tasks.sort((a, b) => a.time - b.time);
+
+    handleFinish(sortedTasks, index);
   };
 
   return (

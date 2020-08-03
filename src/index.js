@@ -29,7 +29,7 @@ const WEEK_TASKS = [
 
 ReactDOM.render(
   <React.StrictMode>
-    <App weekTasks={WEEK_TASKS} />
+    <App initialWeekTasks={WEEK_TASKS} />
   </React.StrictMode>,
   document.getElementById('root')
 );
