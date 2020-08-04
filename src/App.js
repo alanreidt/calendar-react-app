@@ -10,21 +10,18 @@ import './App.css';
 const { TabPane } = Tabs;
 
 const DAY_NAMES = [
-  'Вс',
   'Пн',
   'Вт',
   'Ср',
   'Чт',
   'Пт',
   'Сб',
+  'Вс',
 ];
+const todayDayIndex = moment().isoWeekday() - 1;
 
 function App({ initialWeekTasks = [] }) {
-  const [sundayTasks, ...restTasks] = initialWeekTasks;
-  const initialWeekTasksLocalized = [...restTasks, sundayTasks];
-  const [weekTasks, setWeekTasks] = useState(initialWeekTasksLocalized);
-
-  const todayDayIndex = (moment().day() + 6) % DAY_NAMES.length;
+  const [weekTasks, setWeekTasks] = useState(initialWeekTasks);
 
   const handleFinish = (newDayTasks, newDayTasksIndex) => {
     setWeekTasks(
@@ -35,15 +32,14 @@ function App({ initialWeekTasks = [] }) {
   return (
     <div className="App">
       <Tabs defaultActiveKey={`${todayDayIndex}`} tabPosition="right">
-        {weekTasks.map((dayTasks, i) => {
-          const indexLocalized = (i + 1) % DAY_NAMES.length;
-          const dayName = DAY_NAMES[indexLocalized];
+        {DAY_NAMES.map((dayName, i) => {
+          const dayTasks = weekTasks[i];
           const style = {
             padding: 20,
           };
 
           return (
-            <TabPane style={style} tab={dayName} key={dayName}>
+            <TabPane style={style} tab={dayName} key={i}>
               <Box>
                 <TaskList index={i} initialTasks={dayTasks} handleFinish={handleFinish} />
               </Box>

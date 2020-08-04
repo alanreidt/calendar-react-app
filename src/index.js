@@ -3,29 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import moment from 'moment';
 
-const TIME_FORMAT = "HH:mm";
-
-const WEEK_TASKS = [
-  [],
-  [
-    { name: "Пробежка", time: moment("08:00", TIME_FORMAT) },
-    { name: "Завтрак", time: moment("09:00", TIME_FORMAT) },
-    { name: "Совещание", time: moment("12:00", TIME_FORMAT) },
-  ],
-  [],
-  [
-    { name: "Завтрак", time: moment("09:00", TIME_FORMAT) },
-    { name: "Спортзал", time: moment("19:00", TIME_FORMAT) },
-  ],
-  [],
-  [
-    { name: "Обед", time: moment("13:30", TIME_FORMAT) },
-    { name: "Скайпкол", time: moment("17:40", TIME_FORMAT) },
-  ],
-  [],
-];
+const WEEK_TASKS = Array(7).fill([]);
 
 ReactDOM.render(
   <React.StrictMode>
