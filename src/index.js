@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import moment from 'moment';
 
-const WEEK_TASKS = Array(7).fill([]);
+const WEEK_TASKS = localStorage.getItem('weekTasks') || JSON.stringify(Array(7).fill([]));
+const weekTasks = JSON.parse(WEEK_TASKS, (key, value) => key === 'time' ? moment(value) : value);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App initialWeekTasks={WEEK_TASKS} />
+    <App initialWeekTasks={weekTasks} />
   </React.StrictMode>,
   document.getElementById('root')
 );

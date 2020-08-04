@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Tabs } from 'antd';
 
@@ -22,6 +22,10 @@ const todayDayIndex = moment().isoWeekday() - 1;
 
 function App({ initialWeekTasks = [] }) {
   const [weekTasks, setWeekTasks] = useState(initialWeekTasks);
+
+  useEffect(() => {
+    localStorage.setItem('weekTasks', JSON.stringify(weekTasks));
+  });
 
   const handleFinish = (newDayTasks, newDayTasksIndex) => {
     setWeekTasks(
