@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
 import moment from 'moment';
 import { Tabs } from 'antd';
 
@@ -33,25 +35,29 @@ function App({ initialWeekTasks = [] }) {
     );
   };
 
-  return (
-    <div className="App">
-      <Tabs defaultActiveKey={`${todayDayIndex}`} tabPosition="right">
-        {DAY_NAMES.map((dayName, i) => {
-          const dayTasks = weekTasks[i];
-          const style = {
-            padding: 20,
-          };
+  const handleTaskListDrop = () => {};
 
-          return (
-            <TabPane style={style} tab={dayName} key={i}>
-              <Box>
-                <TaskList id={i} initialTasks={dayTasks} handleFinish={handleFinish} />
-              </Box>
-            </TabPane>
-          )
-        })}
-      </Tabs>
-    </div>
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <div className="App">
+        <Tabs defaultActiveKey={`${todayDayIndex}`} tabPosition="right">
+          {DAY_NAMES.map((dayName, i) => {
+            const dayTasks = weekTasks[i];
+            const style = {
+              padding: 20,
+            };
+
+            return (
+              <TabPane style={style} tab={dayName} key={i}>
+                <Box>
+                  <TaskList id={i} initialTasks={dayTasks} handleFinish={handleFinish} />
+                </Box>
+              </TabPane>
+            )
+          })}
+        </Tabs>
+      </div>
+    </DndProvider>
   );
 }
 
