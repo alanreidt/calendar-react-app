@@ -35,7 +35,9 @@ function App({ initialWeekTasks = [] }) {
     );
   };
 
-  const handleTaskListDrop = () => {};
+  const handleTaskListDrop = (dragSourceId, dropTargetId) => {
+    console.log(`Success, dragSourceId: ${dragSourceId} dropTargetId: ${dropTargetId}`);
+  };
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -50,7 +52,7 @@ function App({ initialWeekTasks = [] }) {
             return (
               <TabPane style={style} tab={dayName} key={i}>
                 <Box>
-                  <TaskList id={i} initialTasks={dayTasks} handleFinish={handleFinish} />
+                  <TaskList id={i} initialTasks={dayTasks} handleFinish={handleFinish} handleTaskListDrop={handleTaskListDrop} />
                 </Box>
               </TabPane>
             )
