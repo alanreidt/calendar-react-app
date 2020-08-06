@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import moment from 'moment';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import moment from 'moment';
+
+import './index.css';
 
 const WEEK_TASKS = localStorage.getItem('weekTasks') || JSON.stringify(Array(7).fill([]));
 const weekTasks = JSON.parse(WEEK_TASKS, (key, value) => key === 'time' ? moment(value) : value);
