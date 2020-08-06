@@ -29,7 +29,7 @@ function App({ initialWeekTasks = [] }) {
     localStorage.setItem('weekTasks', JSON.stringify(weekTasks));
   });
 
-  const handleFinish = (newDayTasks, newDayTasksIndex) => {
+  const handleTaskListFinish = (newDayTasks, newDayTasksIndex) => {
     setWeekTasks(
       (weekTasks) => weekTasks.map((dayTasks, dayTasksIndex) => dayTasksIndex === newDayTasksIndex ? newDayTasks : dayTasks)
     );
@@ -52,7 +52,7 @@ function App({ initialWeekTasks = [] }) {
             return (
               <TabPane style={style} tab={dayName} key={i}>
                 <Box>
-                  <TaskList id={i} initialTasks={dayTasks} handleFinish={handleFinish} handleTaskListDrop={handleTaskListDrop} />
+                  <TaskList id={i} initialTasks={dayTasks} handleTaskListFinish={handleTaskListFinish} handleTaskListDrop={handleTaskListDrop} />
                 </Box>
               </TabPane>
             )
