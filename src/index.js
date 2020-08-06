@@ -7,10 +7,24 @@ import moment from 'moment';
 
 const WEEK_TASKS = localStorage.getItem('weekTasks') || JSON.stringify(Array(7).fill([]));
 const weekTasks = JSON.parse(WEEK_TASKS, (key, value) => key === 'time' ? moment(value) : value);
+const DAY_NAMES = [
+  'Пн',
+  'Вт',
+  'Ср',
+  'Чт',
+  'Пт',
+  'Сб',
+  'Вс',
+];
+const todayDayIndex = moment().isoWeekday() - 1;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App initialWeekTasks={weekTasks} />
+    <App
+      initialWeekTasks={weekTasks}
+      dayNames={DAY_NAMES}
+      todayDayIndex={todayDayIndex}
+    />
   </React.StrictMode>,
   document.getElementById('root')
 );

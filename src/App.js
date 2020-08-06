@@ -6,7 +6,7 @@ import DayTabs from './components/DayTabs/DayTabs';
 
 import './App.css';
 
-function App({ initialWeekTasks = [] }) {
+function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
   const [weekTasks, setWeekTasks] = useState(initialWeekTasks);
 
   useEffect(() => {
@@ -28,6 +28,8 @@ function App({ initialWeekTasks = [] }) {
       <div className="App">
         <DayTabs
           weekTasks={weekTasks}
+          dayNames={dayNames}
+          todayDayIndex={todayDayIndex}
           handleTaskListFinish={handleTaskListFinish}
           handleTaskListDrop={handleTaskListDrop}
         />
