@@ -9,17 +9,17 @@ const { TabPane } = Tabs;
 const DayTabs = ({ weekTasks, dayNames, todayDayIndex, handleTaskListFinish, handleTaskListDrop }) => {
   return (
     <Tabs defaultActiveKey={`${todayDayIndex}`} tabPosition="right">
-      {dayNames.map((dayName, i) => {
-        const dayTasks = weekTasks[i];
+      {dayNames.map((dayName, index) => {
+        const dayTasks = weekTasks[index];
         const style = {
           padding: 20,
         };
 
         return (
-          <TabPane style={style} tab={dayName} key={i}>
+          <TabPane style={style} tab={dayName} key={index}>
             <Box>
               <TaskList
-                id={i}
+                id={index}
                 initialTasks={dayTasks}
                 handleTaskListFinish={handleTaskListFinish}
                 handleTaskListDrop={handleTaskListDrop}
