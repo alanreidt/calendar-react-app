@@ -5,7 +5,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const TIME_FORMAT = "HH:mm";
 
-const TaskList = ({ initialTasks = [], handleFinish, index }) => {
+const TaskList = ({ initialTasks = [], handleFinish, id }) => {
   const [form] = Form.useForm();
 
   const hasOwnID = (index) => initialTasks[index] && initialTasks[index].id !== undefined;
@@ -17,7 +17,7 @@ const TaskList = ({ initialTasks = [], handleFinish, index }) => {
     const sortedTasks = tasks.sort((a, b) => a.time - b.time);
 
     form.setFieldsValue({ tasks: sortedTasks });
-    handleFinish(sortedTasks, index);
+    handleFinish(sortedTasks, id);
   };
 
   return (

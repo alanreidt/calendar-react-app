@@ -45,7 +45,7 @@ function App({ initialWeekTasks = [] }) {
           return (
             <TabPane style={style} tab={dayName} key={i}>
               <Box>
-                <TaskList index={i} initialTasks={dayTasks} handleFinish={handleFinish} />
+                <TaskList id={i} initialTasks={dayTasks} handleFinish={handleFinish} />
               </Box>
             </TabPane>
           )
