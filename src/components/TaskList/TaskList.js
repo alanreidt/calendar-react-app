@@ -9,7 +9,7 @@ const Types = {
   LIST: 'list',
 };
 
-const TaskList = ({ initialTasks = [], handleFinish, handleTaskListDrop, id }) => {
+const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop, id }) => {
   const [{ opacity }, dragRef] = useDrag({
     item: { type: Types.LIST, id },
     end: (item, monitor) => {
@@ -38,7 +38,7 @@ const TaskList = ({ initialTasks = [], handleFinish, handleTaskListDrop, id }) =
     const sortedTasks = tasks.sort((a, b) => a.time - b.time);
 
     form.setFieldsValue({ tasks: sortedTasks });
-    handleFinish(sortedTasks, id);
+    handleTaskListFinish(sortedTasks, id);
   };
 
   return (
