@@ -1,5 +1,5 @@
 import React from 'react';
-import { DragSource } from 'react-dnd';
+import { useDrag } from 'react-dnd';
 
 import { Form, TimePicker, Input, Button, Space, InputNumber } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
@@ -9,39 +9,25 @@ const Types = {
   LIST: 'list',
 };
 
-const cardSource = {
-  beginDrag(props) {
-    const item = { id: props.id };
+const TaskList = ({ initialTasks = [], handleFinish, handleTaskListDrop, id }) => {
+  const [{ opacity }, dragRef] = useDrag({
+    item: { type: Types.LIST, id },
+    end: (item, monitor) => {
+      if (!monitor.didDrop()) {
+        return
+      }
 
-    return item;
-  },
+      // When dropped on a compatible target, do something
+      const dropResult = monitor.getDropResult()
 
-  endDrag(props, monitor, component) {
-    if (!monitor.didDrop()) {
-      return
-    }
+      handleTaskListDrop(item.id, dropResult.id);
+    },
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
+  });
 
-    // When dropped on a compatible target, do something
-    const item = monitor.getItem()
-    const dropResult = monitor.getDropResult()
-    handleTaskListDrop(item.id, dropResult.id);
-  }
-}
-
-function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  }
-}
-
-const TaskList = (props) => {
-  const { initialTasks = [], handleFinish, handleTaskListDrop, id } = props;
   const [form] = Form.useForm();
-
-  // These two props are injected by React DnD,
-  // as defined by your `collect` function above:
-  const { isDragging, connectDragSource } = props;
 
   const hasOwnID = (index) => initialTasks[index] && initialTasks[index].id !== undefined;
   const getOwnID = (index) => initialTasks[index].id;
@@ -55,8 +41,8 @@ const TaskList = (props) => {
     handleFinish(sortedTasks, id);
   };
 
-  return connectDragSource(
-    <div className="TaskList">
+  return (
+    <div className="TaskList" ref={dragRef} style={{ opacity }}>
       <Form
         form={form}
         name="tasks-form"
@@ -130,4 +116,4 @@ const TaskList = (props) => {
   );
 };
 
-export default DragSource(Types.LIST, cardSource, collect)(TaskList);
+export default TaskList;
