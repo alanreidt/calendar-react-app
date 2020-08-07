@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 
 const WEEK_TASKS = localStorage.getItem('weekTasks') || JSON.stringify(Array(7).fill([]));
-const weekTasks = JSON.parse(WEEK_TASKS, (key, value) => key === 'time' ? moment(value) : value);
+const weekTasks = JSON.parse(WEEK_TASKS, (key, value) => key === 'date' ? moment(value) : value);
 const DAY_NAMES = [
   'Пн',
   'Вт',

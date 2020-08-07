@@ -39,7 +39,7 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
   const getID = (index) => hasOwnID(index) ? getOwnID(index) : generateID(index);
 
   const onFinish = ({ tasks }) => {
-    const sortedTasks = tasks.sort((a, b) => a.time - b.time);
+    const sortedTasks = tasks.sort((a, b) => a.date - b.date);
 
     handleTaskListFinish(sortedTasks, id);
   };
@@ -61,9 +61,9 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
                   <Space key={getID(index)} style={{ display: 'flex', marginBottom: 8 }} align="start">
                     <Form.Item
                       {...field}
-                      name={[field.name, 'time']}
-                      fieldKey={[field.fieldKey, 'time']}
-                      rules={[{ required: true, message: 'Missing a task time' }]}
+                      name={[field.name, 'date']}
+                      fieldKey={[field.fieldKey, 'date']}
+                      rules={[{ required: true, message: 'Missing a task date' }]}
                     >
                       <TimePicker placeholder={TIME_FORMAT} format={TIME_FORMAT} />
                     </Form.Item>
