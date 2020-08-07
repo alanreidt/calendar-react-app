@@ -1,31 +1,23 @@
 import React from 'react';
 import { Tabs } from 'antd';
 
-import Box from '../Box/Box';
-import TaskList from '../TaskList/TaskList';
-
-const { TabPane } = Tabs;
+import DayTabPane from '../DayTabPane/DayTabPane';
 
 const DayTabs = ({ weekTasks, dayNames, todayDayIndex, handleTaskListFinish, handleTaskListDrop }) => {
   return (
-    <Tabs defaultActiveKey={`${todayDayIndex}`} tabPosition="right">
+    <Tabs defaultActiveKey={String(todayDayIndex)} tabPosition="right">
       {dayNames.map((dayName, index) => {
         const dayTasks = weekTasks[index];
-        const style = {
-          padding: 20,
-        };
 
         return (
-          <TabPane style={style} tab={dayName} key={index}>
-            <Box>
-              <TaskList
-                id={index}
-                initialTasks={dayTasks}
-                handleTaskListFinish={handleTaskListFinish}
-                handleTaskListDrop={handleTaskListDrop}
-              />
-            </Box>
-          </TabPane>
+          <DayTabPane
+            key={index}
+            id={index}
+            tab={dayName}
+            dayTasks={dayTasks}
+            handleTaskListFinish={handleTaskListFinish}
+            handleTaskListDrop={handleTaskListDrop}
+          />
         );
       })}
     </Tabs>
