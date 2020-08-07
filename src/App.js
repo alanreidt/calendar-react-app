@@ -20,7 +20,12 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
   };
 
   const handleTaskListDrop = (dragSourceId, dropTargetId) => {
-    console.log(`Success, dragSourceId: ${dragSourceId} dropTargetId: ${dropTargetId}`);
+    const sourceIndex = dragSourceId;
+    const targetIndex = dropTargetId;
+
+    setWeekTasks(
+      (weekTasks) => weekTasks.map((dayTasks, dayTasksIndex, self) => dayTasksIndex === targetIndex ? self[sourceIndex] : dayTasks)
+    );
   };
 
   return (
