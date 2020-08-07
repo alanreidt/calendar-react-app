@@ -4,7 +4,7 @@ import './Box.css';
 
 function Box(props) {
   return (
-    <div className="Box">
+    <div className="Box" {...props}>
       {props.children}
     </div>
   );

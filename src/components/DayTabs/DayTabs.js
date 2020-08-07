@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from '@material-ui/core';
 import { Tabs } from 'antd';
 
 import Box from '../Box/Box';
@@ -9,23 +10,22 @@ const { TabPane } = Tabs;
 
 const DayTabs = ({ weekTasks, dayNames, todayDayIndex, handleTaskListFinish, handleTaskListDrop }) => {
   return (
-    <Tabs defaultActiveKey={String(todayDayIndex)} tabPosition="right">
+    <Tabs defaultActiveKey={String(todayDayIndex)} tabPosition="right" centered>
       {dayNames.map((dayName, index) => {
         const dayTasks = weekTasks[index];
-        const style = {
-          padding: 20,
-        };
 
         return (
-          <TabPane style={style} tab={<DayTab id={index} text={dayName} />} key={index}>
-            <Box>
-              <TaskList
-                id={index}
-                initialTasks={dayTasks}
-                handleTaskListFinish={handleTaskListFinish}
-                handleTaskListDrop={handleTaskListDrop}
-              />
-            </Box>
+          <TabPane style={{ padding: 0, }} tab={<DayTab id={index} text={dayName} />} key={index}>
+            <Container maxWidth="sm">
+              <Box>
+                <TaskList
+                  id={index}
+                  initialTasks={dayTasks}
+                  handleTaskListFinish={handleTaskListFinish}
+                  handleTaskListDrop={handleTaskListDrop}
+                />
+              </Box>
+            </Container>
           </TabPane>
         );
       })}
