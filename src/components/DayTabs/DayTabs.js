@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 
 import Box from '../Box/Box';
+import DayTab from '../DayTab/DayTab';
 import TaskList from '../TaskList/TaskList';
 
 const { TabPane } = Tabs;
@@ -16,7 +17,7 @@ const DayTabs = ({ weekTasks, dayNames, todayDayIndex, handleTaskListFinish, han
         };
 
         return (
-          <TabPane style={style} tab={dayName} key={index}>
+          <TabPane style={style} tab={<DayTab id={index} text={dayName} />} key={index}>
             <Box>
               <TaskList
                 id={index}
