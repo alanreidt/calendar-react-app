@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 
 import { Form, TimePicker, Input, Button, Space, InputNumber } from 'antd';
@@ -29,6 +29,10 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
 
   const [form] = Form.useForm();
 
+  useEffect(() => {
+    form.setFieldsValue({ tasks: initialTasks });
+  });
+
   const hasOwnID = (index) => initialTasks[index] && initialTasks[index].id !== undefined;
   const getOwnID = (index) => initialTasks[index].id;
   const generateID = (index) => index + 1;
@@ -37,7 +41,6 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
   const onFinish = ({ tasks }) => {
     const sortedTasks = tasks.sort((a, b) => a.time - b.time);
 
-    form.setFieldsValue({ tasks: sortedTasks });
     handleTaskListFinish(sortedTasks, id);
   };
 
