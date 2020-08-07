@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Container } from '@material-ui/core';
 
 import DayTabs from './components/DayTabs/DayTabs';
 
@@ -31,13 +32,15 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
-        <DayTabs
-          weekTasks={weekTasks}
-          dayNames={dayNames}
-          todayDayIndex={todayDayIndex}
-          handleTaskListFinish={handleTaskListFinish}
-          handleTaskListDrop={handleTaskListDrop}
-        />
+        <Container maxWidth="lg" style={{ paddingTop: 100, }}>
+          <DayTabs
+            weekTasks={weekTasks}
+            dayNames={dayNames}
+            todayDayIndex={todayDayIndex}
+            handleTaskListFinish={handleTaskListFinish}
+            handleTaskListDrop={handleTaskListDrop}
+          />
+        </Container>
       </div>
     </DndProvider>
   );
