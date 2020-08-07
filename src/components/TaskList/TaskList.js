@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
+import { v4 as uuid } from 'uuid';
 
 import { Form, TimePicker, Input, Button, Space, InputNumber } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
@@ -35,7 +36,7 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
 
   const hasOwnID = (index) => initialTasks[index] && initialTasks[index].id !== undefined;
   const getOwnID = (index) => initialTasks[index].id;
-  const generateID = (index) => index + 1;
+  const generateID = (index) => uuid();
   const getID = (index) => hasOwnID(index) ? getOwnID(index) : generateID(index);
 
   const onFinish = ({ tasks }) => {
