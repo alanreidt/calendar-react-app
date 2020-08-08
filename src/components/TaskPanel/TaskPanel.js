@@ -1,61 +1,29 @@
-import React, { useEffect } from 'react';
-import { useDrag } from 'react-dnd';
+import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import { Form, TimePicker, Input, Button, Space } from 'antd';
-import { MinusCircleOutlined } from '@ant-design/icons';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const TIME_FORMAT = "HH:mm";
-const Types = {
-  LIST: 'list',
-};
 
-const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop, id }) => {
-  const [{ opacity }, dragRef] = useDrag({
-    item: { type: Types.LIST, id },
-    end: (item, monitor) => {
-      if (!monitor.didDrop()) {
-        return
-      }
+const TaskPanel = () => {
+  const generateID = (index) => uuid();
 
-      // When dropped on a compatible target, do something
-      const dropResult = monitor.getDropResult()
-
-      handleTaskListDrop(item.id, dropResult.id);
-    },
-    collect: (monitor) => ({
-      opacity: monitor.isDragging() ? 0.5 : 1,
-    }),
-  });
-
-  const [form] = Form.useForm();
-
-  useEffect(() => {
-    form.setFieldsValue({ tasks: initialTasks });
-  });
-
-  const getID = (index) => initialTasks[index] && initialTasks[index].id;
-
-  const onFinish = ({ tasks }) => {
-    const sortedTasks = tasks.sort((a, b) => a.date - b.date);
-
-    handleTaskListFinish(sortedTasks, id);
-  };
+  const onFinish = ({ tasks }) => {};
 
   return (
-    <div className="TaskList" ref={dragRef} style={{ opacity }}>
+    <div className="TaskPanel">
       <Form
-        form={form}
-        name="task-list-form"
-        initialValues={{ tasks: initialTasks }}
+        name="task-panel-form"
         onFinish={onFinish}
         autoComplete="off"
       >
         <Form.List name="tasks">
-          {(fields, { remove }) => {
+          {(fields, { add, remove }) => {
             return (
               <div>
                 {fields.map((field, index) => (
-                  <Space key={getID(index)} style={{ display: 'flex', marginBottom: 8 }} align="start">
+                  <Space key={field.key} style={{ display: 'flex', marginBottom: 8 }} align="start">
                     <Form.Item
                       {...field}
                       name={[field.name, 'date']}
@@ -76,6 +44,7 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
                       {...field}
                       name={[field.name, 'id']}
                       fieldKey={[field.fieldKey, 'id']}
+                      initialValue={generateID(index)}
                       hidden
                     >
                       <Input />
@@ -88,6 +57,18 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
                     />
                   </Space>
                 ))}
+
+                <Form.Item>
+                  <Button
+                    type="dashed"
+                    onClick={() => {
+                      add();
+                    }}
+                    block
+                  >
+                    <PlusOutlined /> Add task
+                  </Button>
+                </Form.Item>
               </div>
             );
           }}
@@ -103,4 +84,4 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
   );
 };
 
-export default TaskList;
+export default TaskPanel;

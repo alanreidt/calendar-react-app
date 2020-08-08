@@ -5,6 +5,7 @@ import { Tabs } from 'antd';
 import Box from '../Box/Box';
 import DayTab from '../DayTab/DayTab';
 import TaskList from '../TaskList/TaskList';
+import TaskPanel from '../TaskPanel/TaskPanel';
 
 const { TabPane } = Tabs;
 
@@ -24,6 +25,7 @@ const DayTabs = ({ weekTasks, dayNames, todayDayIndex, handleTaskListFinish, han
                   handleTaskListFinish={handleTaskListFinish}
                   handleTaskListDrop={handleTaskListDrop}
                 />
+                <TaskPanel />
               </Box>
             </Container>
           </TabPane>
