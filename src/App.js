@@ -37,8 +37,8 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
             weekTasks={weekTasks}
             dayNames={dayNames}
             todayDayIndex={todayDayIndex}
-            handleTaskListFinish={handleTaskListFinish}
-            handleTaskListDrop={handleTaskListDrop}
+            onTaskListFinish={handleTaskListFinish}
+            onTaskListDrop={handleTaskListDrop}
           />
         </Container>
       </div>

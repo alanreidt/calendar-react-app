@@ -9,7 +9,7 @@ import TaskPanel from '../TaskPanel/TaskPanel';
 
 const { TabPane } = Tabs;
 
-const DayTabs = ({ weekTasks, dayNames, todayDayIndex, handleTaskListFinish, handleTaskListDrop }) => {
+const DayTabs = ({ weekTasks, dayNames, todayDayIndex, onTaskListFinish, onTaskListDrop }) => {
   return (
     <Tabs defaultActiveKey={String(todayDayIndex)} tabPosition="right" centered>
       {dayNames.map((dayName, index) => {
@@ -22,8 +22,8 @@ const DayTabs = ({ weekTasks, dayNames, todayDayIndex, handleTaskListFinish, han
                 <TaskList
                   id={index}
                   initialTasks={dayTasks}
-                  handleTaskListFinish={handleTaskListFinish}
-                  handleTaskListDrop={handleTaskListDrop}
+                  onTaskListFinish={onTaskListFinish}
+                  onTaskListDrop={onTaskListDrop}
                 />
                 <TaskPanel />
               </Box>

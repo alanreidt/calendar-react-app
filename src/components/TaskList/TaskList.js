@@ -9,7 +9,7 @@ const Types = {
   LIST: 'list',
 };
 
-const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop, id }) => {
+const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) => {
   const [{ opacity }, dragRef] = useDrag({
     item: { type: Types.LIST, id },
     end: (item, monitor) => {
@@ -20,7 +20,7 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
       // When dropped on a compatible target, do something
       const dropResult = monitor.getDropResult()
 
-      handleTaskListDrop(item.id, dropResult.id);
+      onTaskListDrop(item.id, dropResult.id);
     },
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.5 : 1,
@@ -36,10 +36,10 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
 
   const getID = (index) => initialTasks[index] && initialTasks[index].id;
 
-  const onFinish = ({ tasks }) => {
+  const handleFinish = ({ tasks }) => {
     const sortedTasks = tasks.sort((a, b) => a.date - b.date);
 
-    handleTaskListFinish(sortedTasks, id);
+    onTaskListFinish(sortedTasks, id);
   };
 
   const handleRemove = (index, remove) => {
@@ -59,7 +59,7 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
         form={form}
         name="task-list-form"
         initialValues={{ tasks: initialTasks }}
-        onFinish={onFinish}
+        onFinish={handleFinish}
         autoComplete="off"
       >
         <Form.List name="tasks">
