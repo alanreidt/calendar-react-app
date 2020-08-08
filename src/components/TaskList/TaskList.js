@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDrag } from 'react-dnd';
+import moment from 'moment';
 
 import { Form, TimePicker, Input, Button, Space } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
@@ -10,6 +11,23 @@ const Types = {
 };
 
 const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) => {
+  const [date, setDate] = useState(moment());
+
+  const tick = () => {
+    setDate(moment());
+  };
+
+  useEffect(() => {
+    const timerID = setInterval(
+      () => tick(),
+      1000
+    );
+
+    return () => {
+      clearInterval(timerID);
+    };
+  });
+
   const [{ opacity }, dragRef] = useDrag({
     item: { type: Types.LIST, id },
     end: (item, monitor) => {
@@ -53,6 +71,11 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
     }, 0);
   }
 
+  const checkIsExpired = (index) => initialTasks[index].date < date;
+  const composeFormControlClassName = (index) => (
+    `form-control ${checkIsExpired(index) ? 'form-control_expired' : ''}`
+  );
+
   return (
     <div className="TaskList" ref={dragRef} style={{ opacity }}>
       <Form
@@ -74,7 +97,7 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
                       fieldKey={[field.fieldKey, 'date']}
                       rules={[{ required: true, message: 'Missing a task date' }]}
                     >
-                      <TimePicker placeholder={TIME_FORMAT} format={TIME_FORMAT} />
+                      <TimePicker className={composeFormControlClassName(index)} placeholder={TIME_FORMAT} format={TIME_FORMAT} />
                     </Form.Item>
                     <Form.Item
                       {...field}
@@ -82,7 +105,7 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
                       fieldKey={[field.fieldKey, 'name']}
                       rules={[{ required: true, message: 'Missing a task name' }]}
                     >
-                      <Input placeholder="Введите задачу" allowClear />
+                      <Input className={composeFormControlClassName(index)} placeholder="Введите задачу" allowClear />
                     </Form.Item>
                     <Form.Item
                       {...field}
