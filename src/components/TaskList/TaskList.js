@@ -30,6 +30,7 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
   const [form] = Form.useForm();
 
   useEffect(() => {
+    // Synchronize initialTasks update manually, 'cause form ignores it by default
     form.setFieldsValue({ tasks: initialTasks });
   });
 
