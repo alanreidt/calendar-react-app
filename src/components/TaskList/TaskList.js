@@ -41,6 +41,17 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
     handleTaskListFinish(sortedTasks, id);
   };
 
+  const handleRemove = (index, remove) => {
+    remove(index);
+
+    // Give time for the form to remove the item
+    // Validation yields error otherwise
+    setTimeout(() => {
+      // Synchronize the App state through the onFinish callback
+      form.submit()
+    }, 0);
+  }
+
   return (
     <div className="TaskList" ref={dragRef} style={{ opacity }}>
       <Form
@@ -83,7 +94,7 @@ const TaskList = ({ initialTasks = [], handleTaskListFinish, handleTaskListDrop,
 
                     <MinusCircleOutlined
                       onClick={() => {
-                        remove(field.name);
+                        handleRemove(field.name, remove);
                       }}
                     />
                   </Space>
