@@ -29,6 +29,14 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
     );
   };
 
+  const handleTaskPanelFinish = (newDayTask, newDayTasksIndex) => {
+    const createNewDayTasks = (dayTasks) => [...dayTasks, newDayTask].sort((a, b) => a.date - b.date);
+
+    setWeekTasks(
+      (weekTasks) => weekTasks.map((dayTasks, dayTasksIndex) => dayTasksIndex === newDayTasksIndex ? createNewDayTasks(dayTasks) : dayTasks)
+    );
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
@@ -39,6 +47,7 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
             todayDayIndex={todayDayIndex}
             onTaskListFinish={handleTaskListFinish}
             onTaskListDrop={handleTaskListDrop}
+            onTaskPanelFinish={handleTaskPanelFinish}
           />
         </Container>
       </div>

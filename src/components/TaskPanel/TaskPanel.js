@@ -6,7 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 
 const TIME_FORMAT = "HH:mm";
 
-const TaskPanel = () => {
+const TaskPanel = ({ id, onTaskPanelFinish }) => {
   const [shown, setShown] = useState(false);
 
   const generateID = (index) => uuid();
@@ -23,6 +23,8 @@ const TaskPanel = () => {
 
   const [form] = Form.useForm();
   const handleFinish = (newTask) => {
+    onTaskPanelFinish(newTask, id);
+
     form.setFieldsValue(initialValues);
 
     setShown(false);
