@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSpring, animated } from 'react-spring';
 import { v4 as uuid } from 'uuid';
 
 import { Form, TimePicker, Input, Button, Space } from 'antd';
@@ -29,6 +30,12 @@ const TaskPanel = ({ id, onTaskPanelFinish }) => {
 
     setShown(false);
   };
+
+  const props = useSpring({
+    x: 50,
+    from: { x: 0 }
+  });
+  const AnimatedButton = animated(Button);
 
   return (
     <div className="TaskPanel">
@@ -62,12 +69,15 @@ const TaskPanel = ({ id, onTaskPanelFinish }) => {
           </Space>
 
           <Form.Item hidden={shown}>
-            <Button
+            <AnimatedButton
+              style={{
+                transform: props.x.interpolate(x => `translate3d(${x}%, 0, 0)`)
+              }}
               type="dashed"
               onClick={handleAddButtonClick}
             >
               <PlusOutlined /> Add task
-            </Button>
+            </AnimatedButton>
           </Form.Item>
 
           <Form.Item hidden={!shown}>
