@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { Form, TimePicker, Input, Button, Space } from 'antd';
+import { Form, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-
-const TIME_FORMAT = "HH:mm";
+import Task from '../Task/Task';
 
 const TaskPanel = ({ id, onTaskPanelFinish }) => {
   const [shown, setShown] = useState(false);
@@ -30,6 +29,8 @@ const TaskPanel = ({ id, onTaskPanelFinish }) => {
     setShown(false);
   };
 
+  const getID = (index) => initialValues && initialValues.id;
+
   return (
     <div className="TaskPanel">
       <Form
@@ -39,46 +40,22 @@ const TaskPanel = ({ id, onTaskPanelFinish }) => {
         initialValues={initialValues}
         autoComplete="off"
       >
-        <Space data-flip-id={`id-${initialValues.id}`}>
-          <Space style={{ visibility: shown ? 'visible' : 'hidden' }}>
-            <Form.Item
-              name="date"
-              rules={[{ required: true, message: 'Missing a task date' }]}
-            >
-              <TimePicker placeholder={TIME_FORMAT} format={TIME_FORMAT} />
-            </Form.Item>
-            <Form.Item
-              name="name"
-              rules={[{ required: true, message: 'Missing a task name' }]}
-            >
-              <Input placeholder="Введите задачу" allowClear />
-            </Form.Item>
-            <Form.Item
-              name="id"
-              hidden
-            >
-              <Input />
-            </Form.Item>
-          </Space>
-
-          <Form.Item hidden={shown}>
-            <Button
-              type="dashed"
+        <Task
+          id={getID()}
+          button={
+            <PlusOutlined
               onClick={handleAddButtonClick}
-            >
-              <PlusOutlined /> Add task
-            </Button>
-          </Form.Item>
-
-          <Form.Item hidden={!shown}>
-            <Button
-              type="primary"
-              htmlType="submit"
-            >
-              Submit
-            </Button>
-          </Form.Item>
-        </Space>
+            />
+          }
+        />
+        <Form.Item hidden>
+          <Button
+            type="primary"
+            htmlType="submit"
+          >
+            Submit
+          </Button>
+        </Form.Item>
       </Form>
     </div>
   );

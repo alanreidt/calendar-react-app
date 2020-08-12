@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDrag } from 'react-dnd';
 import moment from 'moment';
 
-import { Form, TimePicker, Input, Button, Space } from 'antd';
+import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
+import Task from '../Task/Task';
 
-const TIME_FORMAT = "HH:mm";
 const Types = {
   LIST: 'list',
 };
@@ -72,9 +72,6 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
   }
 
   const checkIsExpired = (index) => initialTasks[index].date < date;
-  const composeFormControlClassName = (index) => (
-    `form-control ${checkIsExpired(index) ? 'form-control_expired' : ''}`
-  );
 
   return (
     <div className="TaskList" ref={dragRef} style={{ opacity }}>
@@ -90,38 +87,19 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
             return (
               <div>
                 {fields.map((field, index) => (
-                  <Space key={getID(index)} data-flip-id={`id-${getID(index)}`} style={{ display: 'flex', marginBottom: 8 }} align="start">
-                    <Form.Item
-                      {...field}
-                      name={[field.name, 'date']}
-                      fieldKey={[field.fieldKey, 'date']}
-                      rules={[{ required: true, message: 'Missing a task date' }]}
-                    >
-                      <TimePicker className={composeFormControlClassName(index)} placeholder={TIME_FORMAT} format={TIME_FORMAT} />
-                    </Form.Item>
-                    <Form.Item
-                      {...field}
-                      name={[field.name, 'name']}
-                      fieldKey={[field.fieldKey, 'name']}
-                      rules={[{ required: true, message: 'Missing a task name' }]}
-                    >
-                      <Input className={composeFormControlClassName(index)} placeholder="Введите задачу" allowClear />
-                    </Form.Item>
-                    <Form.Item
-                      {...field}
-                      name={[field.name, 'id']}
-                      fieldKey={[field.fieldKey, 'id']}
-                      hidden
-                    >
-                      <Input />
-                    </Form.Item>
-
-                    <MinusCircleOutlined
-                      onClick={() => {
-                        handleRemove(field.name, remove);
-                      }}
-                    />
-                  </Space>
+                  <Task
+                    key={getID(index)}
+                    id={getID(index)}
+                    index={index}
+                    expired={checkIsExpired(index)}
+                    button={
+                      <MinusCircleOutlined
+                        onClick={() => {
+                          handleRemove(index, remove);
+                        }}
+                      />
+                    }
+                  />
                 ))}
               </div>
             );
