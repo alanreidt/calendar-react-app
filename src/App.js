@@ -30,8 +30,8 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
     );
   };
 
-  const handleTaskPanelFinish = (newDayTask, newDayTasksIndex) => {
-    const createNewDayTasks = (dayTasks) => [...dayTasks, newDayTask].sort((a, b) => a.date - b.date);
+  const handleTaskPanelFinish = (newDayTasks, newDayTasksIndex) => {
+    const createNewDayTasks = (dayTasks) => [...dayTasks, ...newDayTasks].sort((a, b) => a.date - b.date);
 
     setWeekTasks(
       (weekTasks) => weekTasks.map((dayTasks, dayTasksIndex) => dayTasksIndex === newDayTasksIndex ? createNewDayTasks(dayTasks) : dayTasks)

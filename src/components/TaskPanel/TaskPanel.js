@@ -9,10 +9,9 @@ const generateID = (index) => uuid();
 
 const TaskPanel = ({ id, onTaskPanelFinish }) => {
   const [form] = Form.useForm();
-  const handleFinish = ({ tasks }) => {
-    const newTask = tasks[0];
 
-    onTaskPanelFinish(newTask, id);
+  const handleFinish = ({ tasks }) => {
+    onTaskPanelFinish(tasks, id);
 
     form.resetFields();
   };
