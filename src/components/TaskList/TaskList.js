@@ -90,7 +90,7 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
             return (
               <div>
                 {fields.map((field, index) => (
-                  <Space key={getID(index)} style={{ display: 'flex', marginBottom: 8 }} align="start">
+                  <Space key={getID(index)} data-flip-id={`id-${getID(index)}`} style={{ display: 'flex', marginBottom: 8 }} align="start">
                     <Form.Item
                       {...field}
                       name={[field.name, 'date']}

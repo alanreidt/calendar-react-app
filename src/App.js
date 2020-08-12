@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { FlipProvider } from 'react-easy-flip';
 import { Container } from '@material-ui/core';
 
 import DayTabs from './components/DayTabs/DayTabs';
@@ -39,18 +40,20 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="App">
-        <Container maxWidth="lg" style={{ paddingTop: 100, }}>
-          <DayTabs
-            weekTasks={weekTasks}
-            dayNames={dayNames}
-            todayDayIndex={todayDayIndex}
-            onTaskListFinish={handleTaskListFinish}
-            onTaskListDrop={handleTaskListDrop}
-            onTaskPanelFinish={handleTaskPanelFinish}
-          />
-        </Container>
-      </div>
+      <FlipProvider>
+        <div className="App">
+          <Container maxWidth="lg" style={{ paddingTop: 100, }}>
+            <DayTabs
+              weekTasks={weekTasks}
+              dayNames={dayNames}
+              todayDayIndex={todayDayIndex}
+              onTaskListFinish={handleTaskListFinish}
+              onTaskListDrop={handleTaskListDrop}
+              onTaskPanelFinish={handleTaskPanelFinish}
+            />
+          </Container>
+        </div>
+      </FlipProvider>
     </DndProvider>
   );
 }

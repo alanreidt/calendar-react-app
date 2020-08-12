@@ -39,7 +39,7 @@ const TaskPanel = ({ id, onTaskPanelFinish }) => {
         initialValues={initialValues}
         autoComplete="off"
       >
-        <Space>
+        <Space data-flip-id={`id-${initialValues.id}`}>
           <Space style={{ visibility: shown ? 'visible' : 'hidden' }}>
             <Form.Item
               name="date"
