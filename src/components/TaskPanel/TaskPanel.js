@@ -6,6 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import Task from '../Task/Task';
 
 const generateID = (index) => uuid();
+const getID = (source, index) => source[index] && source[index].id;
 
 const TaskPanel = ({ id, onTaskPanelFinish }) => {
   const [form] = Form.useForm();
@@ -15,8 +16,6 @@ const TaskPanel = ({ id, onTaskPanelFinish }) => {
 
     form.resetFields();
   };
-
-  const getTaskID = (source, index) => source[index] && source[index].id;
 
   return (
     <div className="TaskPanel">
@@ -32,7 +31,7 @@ const TaskPanel = ({ id, onTaskPanelFinish }) => {
               <div>
                 {fields.map((field, index) => {
                   const { tasks } = form.getFieldsValue();
-                  const taskID = getTaskID(tasks, index);
+                  const taskID = getID(tasks, index);
 
                   return (
                     <Task
