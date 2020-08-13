@@ -14,6 +14,7 @@ const Types = {
 
 const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) => {
   const [date, setDate] = useState(moment());
+  const checkIsExpired = checkIsDateExpired(date);
 
   const tick = () => {
     setDate(moment());
@@ -92,7 +93,7 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
                       key={taskID}
                       id={taskID}
                       index={index}
-                      expired={checkIsDateExpired(date, initialTasks, index)}
+                      expired={checkIsExpired(initialTasks, index)}
                       button={
                         <MinusCircleOutlined
                           onClick={() => {
