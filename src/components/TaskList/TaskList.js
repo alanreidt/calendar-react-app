@@ -13,20 +13,15 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
   const [date, setDate] = useState(moment());
   const checkIsExpired = checkIsDateExpired(date);
 
-  const tick = () => {
-    setDate(moment());
-  };
-
   useEffect(() => {
-    const timerID = setInterval(
-      () => tick(),
-      1000
-    );
+    const timerID = setInterval(() => {
+      setDate(moment());
+    }, 1000);
 
     return () => {
       clearInterval(timerID);
     };
-  });
+  }, []);
 
   const [{ opacity }, dragRef] = useDrag({
     item: { type: Types.LIST, id },
