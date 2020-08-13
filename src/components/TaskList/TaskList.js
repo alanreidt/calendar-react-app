@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import moment from 'moment';
 
@@ -6,22 +6,12 @@ import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
 import { Types } from '../../utils/constants';
-import { getID, checkIsDateExpired } from '../../utils/helpers';
+import { useTick, getID, checkIsDateExpired } from '../../utils/helpers';
 import Task from '../Task/Task';
 
 const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) => {
-  const [date, setDate] = useState(moment());
+  const date = useTick(moment());
   const checkIsExpired = checkIsDateExpired(date);
-
-  useEffect(() => {
-    const timerID = setInterval(() => {
-      setDate(moment());
-    }, 1000);
-
-    return () => {
-      clearInterval(timerID);
-    };
-  }, []);
 
   const [{ opacity }, dragRef] = useDrag({
     item: { type: Types.LIST, id },
