@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
-import { generateID, getID } from '../../utils/helpers.js';
+import { generateID, getID } from '../../utils/helpers';
 import Task from '../Task/Task';
 
 const TaskPanel = ({ id, onTaskPanelFinish }) => {

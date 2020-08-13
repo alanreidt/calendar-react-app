@@ -6,7 +6,7 @@ import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
 import { Types } from '../../utils/constants';
-import { getID, checkIsDateExpired } from '../../utils/helpers.js';
+import { getID, checkIsDateExpired } from '../../utils/helpers';
 import Task from '../Task/Task';
 
 const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) => {
