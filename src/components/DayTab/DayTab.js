@@ -1,9 +1,7 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 
-const Types = {
-  LIST: 'list',
-};
+import { Types } from '../../utils/constants';
 
 const DayTab = ({ id, text }) => {
   const [, dropRef] = useDrop({

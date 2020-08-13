@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, TimePicker, Input, Space } from 'antd';
 
-const TIME_FORMAT = "HH:mm";
+import { TIME_FORMAT } from '../../utils/constants';
 
 const Task = ({ id, index, expired = false, button = null }) => {
   const generateName = (name) => index !== undefined ? [index, name] : name;

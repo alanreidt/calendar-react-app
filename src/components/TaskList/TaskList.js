@@ -5,12 +5,9 @@ import moment from 'moment';
 import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
+import { Types } from '../../utils/constants';
 import { getID, checkIsDateExpired } from '../../utils/helpers.js';
 import Task from '../Task/Task';
-
-const Types = {
-  LIST: 'list',
-};
 
 const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) => {
   const [date, setDate] = useState(moment());

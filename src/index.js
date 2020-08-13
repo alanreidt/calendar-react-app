@@ -2,23 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
 
+import { WEEK_TASKS, DAY_NAMES, todayDayIndex } from './utils/constants';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 
-const WEEK_TASKS = localStorage.getItem('weekTasks') || JSON.stringify(Array(7).fill([]));
 const weekTasks = JSON.parse(WEEK_TASKS, (key, value) => key === 'date' ? moment(value) : value);
-const DAY_NAMES = [
-  'Пн',
-  'Вт',
-  'Ср',
-  'Чт',
-  'Пт',
-  'Сб',
-  'Вс',
-];
-const todayDayIndex = moment().isoWeekday() - 1;
 
 ReactDOM.render(
   <React.StrictMode>
