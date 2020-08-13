@@ -1,12 +1,9 @@
 import React from 'react';
-import { v4 as uuid } from 'uuid';
-
 import { Form, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import Task from '../Task/Task';
 
-const generateID = (index) => uuid();
-const getID = (source, index) => source[index] && source[index].id;
+import { generateID, getID } from '../../utils/helpers.js';
+import Task from '../Task/Task';
 
 const TaskPanel = ({ id, onTaskPanelFinish }) => {
   const [form] = Form.useForm();

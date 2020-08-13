@@ -4,6 +4,8 @@ import moment from 'moment';
 
 import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
+
+import { getID, checkIsDateExpired } from '../../utils/helpers.js';
 import Task from '../Task/Task';
 
 const Types = {
@@ -52,8 +54,6 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
     form.setFieldsValue({ tasks: initialTasks });
   });
 
-  const getID = (index) => initialTasks[index] && initialTasks[index].id;
-
   const handleFinish = ({ tasks }) => {
     const sortedTasks = tasks.sort((a, b) => a.date - b.date);
 
@@ -71,8 +71,6 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
     }, 0);
   }
 
-  const checkIsExpired = (index) => initialTasks[index].date < date;
-
   return (
     <div className="TaskList" ref={dragRef} style={{ opacity }}>
       <Form
@@ -86,21 +84,25 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
           {(fields, { remove }) => {
             return (
               <div>
-                {fields.map((field, index) => (
-                  <Task
-                    key={getID(index)}
-                    id={getID(index)}
-                    index={index}
-                    expired={checkIsExpired(index)}
-                    button={
-                      <MinusCircleOutlined
-                        onClick={() => {
-                          handleRemove(index, remove);
-                        }}
-                      />
-                    }
-                  />
-                ))}
+                {fields.map((field, index) => {
+                  const taskID = getID(initialTasks, index);
+
+                  return (
+                    <Task
+                      key={taskID}
+                      id={taskID}
+                      index={index}
+                      expired={checkIsDateExpired(date, initialTasks, index)}
+                      button={
+                        <MinusCircleOutlined
+                          onClick={() => {
+                            handleRemove(index, remove);
+                          }}
+                        />
+                      }
+                    />
+                  )
+                })}
               </div>
             );
           }}
