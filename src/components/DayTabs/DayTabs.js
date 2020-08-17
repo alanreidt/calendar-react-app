@@ -32,6 +32,7 @@ const DayTabs = ({ weekTasks, dayNames, todayDayIndex, onTaskListFinish, onCopyB
                     />
                   </div>
                   <TaskList
+                    id={index}
                     initialTasks={dayTasks}
                     onTaskListFinish={onTaskListFinish}
                   />
