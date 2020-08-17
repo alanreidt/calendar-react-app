@@ -35,7 +35,7 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
   useEffect(() => {
     // Synchronize initialTasks update manually, 'cause form ignores it by default
     form.setFieldsValue({ tasks: initialTasks });
-  });
+  }, [form, initialTasks]);
 
   const handleFinish = ({ tasks }) => {
     const sortedTasks = tasks.sort((a, b) => a.date - b.date);
