@@ -4,6 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { FlipProvider } from 'react-easy-flip';
 import { Container } from '@material-ui/core';
 
+import { getTime } from './utils/helpers';
 import DayTabs from './components/DayTabs/DayTabs';
 
 import './App.css';
@@ -12,7 +13,10 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
   const [weekTasks, setWeekTasks] = useState(initialWeekTasks);
 
   useEffect(() => {
-    localStorage.setItem('weekTasks', JSON.stringify(weekTasks));
+    localStorage.setItem('weekTasks', JSON.stringify(
+      weekTasks,
+      (key, value) => key === 'date' ? getTime(value) : value
+    ));
   });
 
   const handleTaskListFinish = (newDayTasks, newDayTasksIndex) => {
