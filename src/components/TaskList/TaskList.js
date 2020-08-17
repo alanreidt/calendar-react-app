@@ -1,34 +1,15 @@
 import React, { useEffect } from 'react';
-import { useDrag } from 'react-dnd';
 import moment from 'moment';
 
 import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
-import { Types } from '../../utils/constants';
 import { useTick, getID, checkIsDateExpired } from '../../utils/helpers';
 import Task from '../Task/Task';
 
-const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) => {
+const TaskList = ({ initialTasks = [], onTaskListFinish, id }) => {
   const date = useTick(moment());
   const checkIsExpired = checkIsDateExpired(date);
-
-  const [{ opacity }, dragRef] = useDrag({
-    item: { type: Types.LIST, id },
-    end: (item, monitor) => {
-      if (!monitor.didDrop()) {
-        return
-      }
-
-      // When dropped on a compatible target, do something
-      const dropResult = monitor.getDropResult()
-
-      onTaskListDrop(item.id, dropResult.id);
-    },
-    collect: (monitor) => ({
-      opacity: monitor.isDragging() ? 0.5 : 1,
-    }),
-  });
 
   const [form] = Form.useForm();
 
@@ -55,7 +36,7 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, onTaskListDrop, id }) =
   }
 
   return (
-    <div className="TaskList" ref={dragRef} style={{ opacity }}>
+    <div className="TaskList">
       <Form
         form={form}
         name="task-list-form"

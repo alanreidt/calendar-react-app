@@ -21,7 +21,7 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
     );
   };
 
-  const handleTaskListDrop = (dragSourceId, dropTargetId) => {
+  const handleCopyButtonDrop = (dragSourceId, dropTargetId) => {
     const sourceIndex = dragSourceId;
     const targetIndex = dropTargetId;
 
@@ -48,7 +48,7 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
               dayNames={dayNames}
               todayDayIndex={todayDayIndex}
               onTaskListFinish={handleTaskListFinish}
-              onTaskListDrop={handleTaskListDrop}
+              onCopyButtonDrop={handleCopyButtonDrop}
               onTaskPanelFinish={handleTaskPanelFinish}
             />
           </Container>
