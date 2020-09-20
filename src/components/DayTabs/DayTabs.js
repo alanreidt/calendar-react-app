@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import moment from 'moment';
+
 import { Container } from '@material-ui/core';
 import { useFlip } from 'react-easy-flip';
 import { Space, Tabs } from 'antd';
 
+import { useInterval } from '../../utils/helpers';
 import { FLIP_ROOT_ID } from '../../utils/constants';
 import Box from '../Box/Box';
 import DayTab from '../DayTab/DayTab';
@@ -14,6 +17,12 @@ const { TabPane } = Tabs;
 
 const DayTabs = ({ weekTasks, dayNames, todayDayIndex, onTaskListFinish, onCopyButtonDrop, onTaskPanelFinish }) => {
   useFlip(FLIP_ROOT_ID);
+
+  let [date, setDate] = useState(moment());
+
+  useInterval(() => {
+    setDate(moment());
+  }, 1000);
 
   return (
     <Tabs defaultActiveKey={String(todayDayIndex)} tabPosition="right" centered>
@@ -35,6 +44,7 @@ const DayTabs = ({ weekTasks, dayNames, todayDayIndex, onTaskListFinish, onCopyB
                     id={index}
                     initialTasks={dayTasks}
                     onTaskListFinish={onTaskListFinish}
+                    date={date}
                   />
                   <TaskPanel
                     id={index}

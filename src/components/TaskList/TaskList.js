@@ -1,21 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+import React, {  useEffect } from 'react';
 
 import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
-import { useInterval, getID, checkIsDateExpired } from '../../utils/helpers';
+import { getID, checkIsDateExpired } from '../../utils/helpers';
 import Task from '../Task/Task';
 
-const TaskList = ({ initialTasks = [], onTaskListFinish, id }) => {
-  let [date, setDate] = useState(moment());
-
-  useInterval(() => {
-    setDate(moment());
-  }, 1000);
-
-  const checkIsExpired = checkIsDateExpired(date);
-
+const TaskList = ({ initialTasks = [], onTaskListFinish, id, date }) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -39,6 +30,8 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, id }) => {
       form.submit()
     }, 0);
   }
+
+  const checkIsExpired = checkIsDateExpired(date);
 
   return (
     <div className="TaskList">
