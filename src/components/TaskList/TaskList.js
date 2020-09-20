@@ -4,11 +4,11 @@ import moment from 'moment';
 import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
-import { useTick, getID, checkIsDateExpired } from '../../utils/helpers';
+import { useDate, getID, checkIsDateExpired } from '../../utils/helpers';
 import Task from '../Task/Task';
 
 const TaskList = ({ initialTasks = [], onTaskListFinish, id }) => {
-  const date = useTick(moment());
+  const date = useDate(moment(), id);
   const checkIsExpired = checkIsDateExpired(date);
 
   const [form] = Form.useForm();

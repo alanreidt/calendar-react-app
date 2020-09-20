@@ -4,20 +4,32 @@ import { v4 as uuid } from 'uuid';
 
 import { TIME_FORMAT } from './constants';
 
-const useTick = (initialDate) => {
+const useTick = (initialDate, disabled = false) => {
   const [date, setDate] = useState(initialDate);
 
   useEffect(() => {
-    const timerID = setInterval(() => {
+    const timerID = disabled
+    ? null
+    : setInterval(() => {
       setDate(moment());
     }, 1000);
 
     return () => {
       clearInterval(timerID);
     };
-  }, []);
+  }, [disabled]);
 
-  return date;
+  return disabled ? null : date;
+}
+
+const checkIsCurrentDay = (dayIndex) => {
+  return (dayIndex - (moment().isoWeekday - 1)) === 0;
+}
+
+const useDate = (initialDate, dayIndex) => {
+  const isCurrentDay = checkIsCurrentDay(dayIndex);
+
+  return useTick(initialDate, !isCurrentDay);
 }
 
 const generateID = (index) => uuid();
@@ -31,6 +43,8 @@ const getTime = (date) => (
 
 export {
   useTick,
+  useDate,
+  checkIsCurrentDay,
   getTime,
   generateID,
   getID,
