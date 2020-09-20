@@ -1,23 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 
 import { TIME_FORMAT } from './constants';
 
-const useTick = (initialDate) => {
-  const [date, setDate] = useState(initialDate);
+// source: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
 
+  // Remember the latest callback.
   useEffect(() => {
-    const timerID = setInterval(() => {
-      setDate(moment());
-    }, 1000);
+    savedCallback.current = callback;
+  }, [callback]);
 
-    return () => {
-      clearInterval(timerID);
-    };
-  }, []);
-
-  return date;
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }
 
 const generateID = (index) => uuid();
@@ -30,7 +35,7 @@ const getTime = (date) => (
 );
 
 export {
-  useTick,
+  useInterval,
   getTime,
   generateID,
   getID,
