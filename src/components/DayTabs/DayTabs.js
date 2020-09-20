@@ -18,10 +18,10 @@ const { TabPane } = Tabs;
 const DayTabs = ({ weekTasks, dayNames, todayDayIndex, onTaskListFinish, onCopyButtonDrop, onTaskPanelFinish }) => {
   useFlip(FLIP_ROOT_ID);
 
-  let [date, setDate] = useState(moment());
+  let [now, setNow] = useState(moment());
 
   useInterval(() => {
-    setDate(moment());
+    setNow(moment());
   }, 1000);
 
   return (
@@ -44,7 +44,7 @@ const DayTabs = ({ weekTasks, dayNames, todayDayIndex, onTaskListFinish, onCopyB
                     id={index}
                     initialTasks={dayTasks}
                     onTaskListFinish={onTaskListFinish}
-                    date={date}
+                    now={now}
                   />
                   <TaskPanel
                     id={index}

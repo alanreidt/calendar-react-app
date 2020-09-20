@@ -6,7 +6,7 @@ import { MinusCircleOutlined } from '@ant-design/icons';
 import { getID, checkIsDateExpired } from '../../utils/helpers';
 import Task from '../Task/Task';
 
-const TaskList = ({ initialTasks = [], onTaskListFinish, id, date }) => {
+const TaskList = ({ initialTasks = [], onTaskListFinish, id, now }) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, id, date }) => {
     }, 0);
   }
 
-  const checkIsExpired = checkIsDateExpired(date);
+  const checkIsExpired = checkIsDateExpired(now);
 
   return (
     <div className="TaskList">
