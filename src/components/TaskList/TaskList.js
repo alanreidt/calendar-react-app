@@ -3,7 +3,7 @@ import React, {  useEffect } from 'react';
 import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
-import { getID, checkIsDateExpired } from '../../utils/helpers';
+import { getID, checkIsDateExpired, normalizeDate } from '../../utils/helpers';
 import Task from '../Task/Task';
 
 const TaskList = ({ initialTasks = [], onTaskListFinish, id, now }) => {
@@ -54,7 +54,7 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, id, now }) => {
                       key={taskID}
                       id={taskID}
                       index={index}
-                      expired={checkIsExpired(initialTasks, index)}
+                      expired={checkIsExpired(normalizeDate(initialTasks[index].date, id))}
                       button={
                         <MinusCircleOutlined
                           onClick={() => {

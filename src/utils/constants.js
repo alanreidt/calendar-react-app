@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { getTodayDayIndex } from './helpers';
 
 const WEEK_TASKS = localStorage.getItem('weekTasks') || JSON.stringify(Array(7).fill([]));
 const DAY_NAMES = [
@@ -11,7 +11,7 @@ const DAY_NAMES = [
   'Вс',
 ];
 const TIME_FORMAT = "HH:mm";
-const todayDayIndex = moment().isoWeekday() - 1;
+const todayDayIndex = getTodayDayIndex();
 
 const FLIP_ROOT_ID = "flip-root";
 

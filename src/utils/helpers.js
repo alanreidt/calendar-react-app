@@ -27,7 +27,9 @@ function useInterval(callback, delay) {
 
 const generateID = (index) => uuid();
 const getID = (source, index) => source[index] && source[index].id;
-const checkIsDateExpired = (date) => (source, index) => source[index].date < date;
+const getTodayDayIndex = () => moment().isoWeekday() - 1;
+const normalizeDate = (date, dayIndex) => moment(date).add(dayIndex - getTodayDayIndex(), 'd');
+const checkIsDateExpired = (now) => (date) => date < now;
 const getTime = (date) => (
   moment(date).isValid()
     ? moment(date).format(TIME_FORMAT)
@@ -39,5 +41,7 @@ export {
   getTime,
   generateID,
   getID,
+  getTodayDayIndex,
+  normalizeDate,
   checkIsDateExpired,
 };
