@@ -33,19 +33,19 @@ function weekTasksReducer(state, action) {
   switch (action.type) {
     case 'update':
       return state.map(
-        (dayTasks, dayTasksIndex) => dayTasksIndex === action.dayIndex
+        (dayTasks, dayIndex) => dayIndex === action.dayIndex
           ? action.payload
           : dayTasks
       );
     case 'copy':
       return state.map(
-        (dayTasks, dayTasksIndex, self) => dayTasksIndex === action.targetIndex
+        (dayTasks, dayIndex, self) => dayIndex === action.targetIndex
           ? self[action.sourceIndex]
           : dayTasks
       );
     case 'add':
       return state.map(
-        (dayTasks, dayTasksIndex) => dayTasksIndex === action.dayIndex
+        (dayTasks, dayIndex) => dayIndex === action.dayIndex
           ? createNewDayTasks(dayTasks, action.payload)
           : dayTasks
       );
