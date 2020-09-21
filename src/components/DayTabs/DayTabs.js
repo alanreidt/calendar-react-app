@@ -18,7 +18,7 @@ const { TabPane } = Tabs;
 const DayTabs = ({ weekTasks, dayNames, todayDayIndex }) => {
   useFlip(FLIP_ROOT_ID);
 
-  let [now, setNow] = useState(moment());
+  const [now, setNow] = useState(moment());
 
   useInterval(() => {
     setNow(moment());
