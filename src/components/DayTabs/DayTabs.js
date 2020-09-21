@@ -15,7 +15,7 @@ import TaskPanel from '../TaskPanel/TaskPanel';
 
 const { TabPane } = Tabs;
 
-const DayTabs = ({ weekTasks, dayNames, todayDayIndex }) => {
+function DayTabs({ weekTasks, dayNames, todayDayIndex }) {
   useFlip(FLIP_ROOT_ID);
 
   const [now, setNow] = useState(moment());

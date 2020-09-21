@@ -6,7 +6,7 @@ import { CopyOutlined } from '@ant-design/icons';
 
 import { Types, WeekTasksDispatch } from '../../utils/constants';
 
-const CopyButton = ({ id, ...restProps }) => {
+function CopyButton({ id, ...restProps }) {
   const dispatch = useContext(WeekTasksDispatch);
 
   const [{ opacity }, dragRef] = useDrag({

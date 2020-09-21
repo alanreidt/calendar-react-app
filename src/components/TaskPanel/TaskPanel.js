@@ -6,7 +6,7 @@ import { generateID, getID } from '../../utils/helpers';
 import { WeekTasksDispatch } from '../../utils/constants';
 import Task from '../Task/Task';
 
-const TaskPanel = ({ id }) => {
+function TaskPanel({ id }) {
   const dispatch = useContext(WeekTasksDispatch);
   const [form] = Form.useForm();
 

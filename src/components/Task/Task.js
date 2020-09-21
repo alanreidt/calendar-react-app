@@ -3,7 +3,7 @@ import { Form, TimePicker, Input, Space } from 'antd';
 
 import { TIME_FORMAT } from '../../utils/constants';
 
-const Task = ({ id, index, expired = false, button = null }) => {
+function Task({ id, index, expired = false, button = null }) {
   const generateName = (name) => index !== undefined ? [index, name] : name;
   const formControlClassName = `form-control ${expired ? 'form-control_expired' : ''}`;
 

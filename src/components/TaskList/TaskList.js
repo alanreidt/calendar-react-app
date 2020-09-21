@@ -7,7 +7,7 @@ import { getID, checkIsDateExpired, normalizeDate } from '../../utils/helpers';
 import { WeekTasksDispatch } from '../../utils/constants';
 import Task from '../Task/Task';
 
-const TaskList = ({ initialTasks = [], id, now }) => {
+function TaskList({ initialTasks = [], id, now }) {
   const dispatch = useContext(WeekTasksDispatch);
   const [form] = Form.useForm();
 
