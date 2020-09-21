@@ -28,9 +28,10 @@ function DayTabs({ weekTasks, dayNames, todayDayIndex }) {
     <Tabs defaultActiveKey={String(todayDayIndex)} tabPosition="right" centered>
       {dayNames.map((dayName, dayIndex) => {
         const dayTasks = weekTasks[dayIndex];
+        const dayTab = <DayTab dayIndex={dayIndex} text={dayName} />;
 
         return (
-          <TabPane style={{ padding: 0, }} tab={<DayTab dayIndex={dayIndex} text={dayName} />} key={dayIndex}>
+          <TabPane style={{ padding: 0, }} tab={dayTab} key={dayIndex}>
             <Container maxWidth="sm">
               <Box>
                 <Space data-flip-root-id={FLIP_ROOT_ID} direction="vertical" size="large">
