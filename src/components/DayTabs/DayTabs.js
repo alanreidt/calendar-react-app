@@ -15,7 +15,7 @@ import TaskPanel from '../TaskPanel/TaskPanel';
 
 const { TabPane } = Tabs;
 
-const DayTabs = ({ weekTasks, dayNames, todayDayIndex, onTaskListFinish, onCopyButtonDrop, onTaskPanelFinish }) => {
+const DayTabs = ({ weekTasks, dayNames, todayDayIndex }) => {
   useFlip(FLIP_ROOT_ID);
 
   let [now, setNow] = useState(moment());
@@ -37,18 +37,15 @@ const DayTabs = ({ weekTasks, dayNames, todayDayIndex, onTaskListFinish, onCopyB
                   <div style={{ textAlign: 'right' }}>
                     <CopyButton
                       id={index}
-                      onCopyButtonDrop={onCopyButtonDrop}
                     />
                   </div>
                   <TaskList
                     id={index}
                     initialTasks={dayTasks}
-                    onTaskListFinish={onTaskListFinish}
                     now={now}
                   />
                   <TaskPanel
                     id={index}
-                    onTaskPanelFinish={onTaskPanelFinish}
                   />
                 </Space>
               </Box>

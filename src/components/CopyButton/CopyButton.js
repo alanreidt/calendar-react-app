@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDrag } from 'react-dnd';
 
 import { Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 
-import { Types } from '../../utils/constants';
+import { Types, WeekTasksDispatch } from '../../utils/constants';
 
-const CopyButton = ({ id, onCopyButtonDrop }) => {
+const CopyButton = ({ id }) => {
+  const dispatch = useContext(WeekTasksDispatch);
+
   const [{ opacity }, dragRef] = useDrag({
     item: { type: Types.LIST, id },
     end: (item, monitor) => {
@@ -17,7 +19,11 @@ const CopyButton = ({ id, onCopyButtonDrop }) => {
       // When dropped on a compatible target, do something
       const dropResult = monitor.getDropResult()
 
-      onCopyButtonDrop(item.id, dropResult.id);
+      dispatch({
+        type: 'copy',
+        sourceIndex: item.id,
+        targetIndex: dropResult.id,
+      });
     },
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.5 : 1,

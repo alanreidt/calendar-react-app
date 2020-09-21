@@ -1,12 +1,14 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
 import { getID, checkIsDateExpired, normalizeDate } from '../../utils/helpers';
+import { WeekTasksDispatch } from '../../utils/constants';
 import Task from '../Task/Task';
 
-const TaskList = ({ initialTasks = [], onTaskListFinish, id, now }) => {
+const TaskList = ({ initialTasks = [], id, now }) => {
+  const dispatch = useContext(WeekTasksDispatch);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -17,7 +19,11 @@ const TaskList = ({ initialTasks = [], onTaskListFinish, id, now }) => {
   const handleFinish = ({ tasks }) => {
     const sortedTasks = tasks.sort((a, b) => a.date - b.date);
 
-    onTaskListFinish(sortedTasks, id);
+    dispatch({
+      type: 'update',
+      dayIndex: id,
+      payload: sortedTasks,
+    });
   };
 
   const handleRemove = (index, remove) => {

@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 import { generateID, getID } from '../../utils/helpers';
+import { WeekTasksDispatch } from '../../utils/constants';
 import Task from '../Task/Task';
 
-const TaskPanel = ({ id, onTaskPanelFinish }) => {
+const TaskPanel = ({ id }) => {
+  const dispatch = useContext(WeekTasksDispatch);
   const [form] = Form.useForm();
 
   const handleFinish = ({ tasks }) => {
-    onTaskPanelFinish(tasks, id);
+    dispatch({
+      type: 'add',
+      dayIndex: id,
+      payload: tasks,
+    });
 
     form.resetFields();
   };

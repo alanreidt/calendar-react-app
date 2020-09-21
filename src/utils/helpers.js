@@ -25,6 +25,34 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
+const createNewDayTasks = (dayTasks, newDayTasks) => (
+  [...dayTasks, ...newDayTasks].sort((a, b) => a.date - b.date)
+);
+
+function weekTasksReducer(state, action) {
+  switch (action.type) {
+    case 'update':
+      return state.map(
+        (dayTasks, dayTasksIndex) => dayTasksIndex === action.dayIndex
+          ? action.payload
+          : dayTasks
+      );
+    case 'copy':
+      return state.map(
+        (dayTasks, dayTasksIndex, self) => dayTasksIndex === action.targetIndex
+          ? self[action.sourceIndex]
+          : dayTasks
+      );
+    case 'add':
+      return state.map(
+        (dayTasks, dayTasksIndex) => dayTasksIndex === action.dayIndex
+          ? createNewDayTasks(dayTasks, action.payload)
+          : dayTasks
+      );
+    default:
+  }
+}
+
 const generateID = (index) => uuid();
 const getID = (source, index) => source[index] && source[index].id;
 const getTodayDayIndex = () => moment().isoWeekday() - 1;
@@ -38,6 +66,8 @@ const getTime = (date) => (
 
 export {
   useInterval,
+  createNewDayTasks,
+  weekTasksReducer,
   getTime,
   generateID,
   getID,
