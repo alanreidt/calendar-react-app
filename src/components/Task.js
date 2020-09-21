@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, TimePicker, Input, Space } from 'antd';
 
-import { TIME_FORMAT } from '../../utils/constants';
+import { TIME_FORMAT } from '../utils/constants';
 
 function Task({ id, index, expired = false, button = null }) {
   const generateName = (name) => index !== undefined ? [index, name] : name;

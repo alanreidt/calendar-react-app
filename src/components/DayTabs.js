@@ -5,13 +5,13 @@ import { Container } from '@material-ui/core';
 import { useFlip } from 'react-easy-flip';
 import { Space, Tabs } from 'antd';
 
-import { useInterval } from '../../utils/helpers';
-import { FLIP_ROOT_ID } from '../../utils/constants';
-import Box from '../Box/Box';
-import DayTab from '../DayTab/DayTab';
-import CopyButton from '../CopyButton/CopyButton';
-import TaskList from '../TaskList/TaskList';
-import TaskPanel from '../TaskPanel/TaskPanel';
+import { useInterval } from '../utils/helpers';
+import { FLIP_ROOT_ID } from '../utils/constants';
+import Box from './Box';
+import DayTab from './DayTab';
+import CopyButton from './CopyButton';
+import TaskList from './TaskList';
+import TaskPanel from './TaskPanel';
 
 const { TabPane } = Tabs;
 

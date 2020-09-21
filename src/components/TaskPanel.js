@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { Form, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
-import { generateID, getID } from '../../utils/helpers';
-import { WeekTasksDispatch } from '../../utils/constants';
-import Task from '../Task/Task';
+import { generateID, getID } from '../utils/helpers';
+import { WeekTasksDispatch } from '../utils/constants';
+import Task from './Task';
 
 function TaskPanel({ id }) {
   const dispatch = useContext(WeekTasksDispatch);

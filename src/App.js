@@ -6,7 +6,7 @@ import { Container } from '@material-ui/core';
 
 import { weekTasksReducer, getTime } from './utils/helpers';
 import { WeekTasksDispatch } from './utils/constants';
-import DayTabs from './components/DayTabs/DayTabs';
+import DayTabs from './components/DayTabs';
 
 import './App.css';
 

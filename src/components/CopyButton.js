@@ -4,7 +4,7 @@ import { useDrag } from 'react-dnd';
 import { Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 
-import { Types, WeekTasksDispatch } from '../../utils/constants';
+import { Types, WeekTasksDispatch } from '../utils/constants';
 
 function CopyButton({ id, ...restProps }) {
   const dispatch = useContext(WeekTasksDispatch);

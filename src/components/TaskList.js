@@ -3,9 +3,9 @@ import React, { useEffect, useContext } from 'react';
 import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
-import { getID, checkIsDateExpired, normalizeDate } from '../../utils/helpers';
-import { WeekTasksDispatch } from '../../utils/constants';
-import Task from '../Task/Task';
+import { getID, checkIsDateExpired, normalizeDate } from '../utils/helpers';
+import { WeekTasksDispatch } from '../utils/constants';
+import Task from './Task';
 
 function TaskList({ initialTasks = [], id, now }) {
   const dispatch = useContext(WeekTasksDispatch);
