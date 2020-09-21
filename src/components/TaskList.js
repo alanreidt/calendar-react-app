@@ -3,7 +3,7 @@ import React, { useEffect, useContext } from 'react';
 import { Form, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
-import { getID, checkIsDateExpired, normalizeDate } from '../utils/helpers';
+import { checkIsDateExpired, normalizeDate } from '../utils/helpers';
 import { WeekTasksDispatch } from '../utils/constants';
 import Task from './Task';
 
@@ -53,7 +53,7 @@ function TaskList({ initialTasks = [], dayIndex, now }) {
             return (
               <div>
                 {fields.map((field, index) => {
-                  const taskID = getID(initialTasks, index);
+                  const taskID = initialTasks[index].id;
 
                   return (
                     <Task

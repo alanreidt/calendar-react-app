@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Form, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
-import { generateID, getID } from '../utils/helpers';
+import { generateID } from '../utils/helpers';
 import { WeekTasksDispatch } from '../utils/constants';
 import Task from './Task';
 
@@ -34,7 +34,7 @@ function TaskPanel({ dayIndex }) {
               <div>
                 {fields.map((field, index) => {
                   const { tasks } = form.getFieldsValue();
-                  const taskID = getID(tasks, index);
+                  const taskID = tasks[index].id;
 
                   return (
                     <Task

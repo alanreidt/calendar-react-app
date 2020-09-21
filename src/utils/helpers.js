@@ -54,7 +54,6 @@ function weekTasksReducer(state, action) {
 }
 
 const generateID = (index) => uuid();
-const getID = (source, index) => source[index] && source[index].id;
 const getTodayDayIndex = () => moment().isoWeekday() - 1;
 const normalizeDate = (date, dayIndex) => moment(date).add(dayIndex - getTodayDayIndex(), 'd');
 const checkIsDateExpired = (now) => (date) => date < now;
@@ -70,7 +69,6 @@ export {
   weekTasksReducer,
   getTime,
   generateID,
-  getID,
   getTodayDayIndex,
   normalizeDate,
   checkIsDateExpired,
