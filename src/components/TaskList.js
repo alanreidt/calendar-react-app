@@ -7,7 +7,7 @@ import { getID, checkIsDateExpired, normalizeDate } from '../utils/helpers';
 import { WeekTasksDispatch } from '../utils/constants';
 import Task from './Task';
 
-function TaskList({ initialTasks = [], id, now }) {
+function TaskList({ initialTasks = [], dayIndex, now }) {
   const dispatch = useContext(WeekTasksDispatch);
   const [form] = Form.useForm();
 
@@ -21,8 +21,8 @@ function TaskList({ initialTasks = [], id, now }) {
 
     dispatch({
       type: 'update',
-      dayIndex: id,
       payload: sortedTasks,
+      dayIndex,
     });
   };
 
@@ -60,7 +60,7 @@ function TaskList({ initialTasks = [], id, now }) {
                       key={taskID}
                       id={taskID}
                       index={index}
-                      expired={checkIsExpired(normalizeDate(initialTasks[index].date, id))}
+                      expired={checkIsExpired(normalizeDate(initialTasks[index].date, dayIndex))}
                       button={
                         <MinusCircleOutlined
                           onClick={() => {

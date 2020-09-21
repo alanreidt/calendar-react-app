@@ -6,14 +6,14 @@ import { generateID, getID } from '../utils/helpers';
 import { WeekTasksDispatch } from '../utils/constants';
 import Task from './Task';
 
-function TaskPanel({ id }) {
+function TaskPanel({ dayIndex }) {
   const dispatch = useContext(WeekTasksDispatch);
   const [form] = Form.useForm();
 
   const handleFinish = ({ tasks }) => {
     dispatch({
       type: 'add',
-      dayIndex: id,
+      dayIndex,
       payload: tasks,
     });
 

@@ -6,11 +6,14 @@ import { CopyOutlined } from '@ant-design/icons';
 
 import { Types, WeekTasksDispatch } from '../utils/constants';
 
-function CopyButton({ id, ...restProps }) {
+function CopyButton({ dayIndex, ...restProps }) {
   const dispatch = useContext(WeekTasksDispatch);
 
   const [{ opacity }, dragRef] = useDrag({
-    item: { type: Types.LIST, id },
+    item: {
+      type: Types.LIST,
+      index: dayIndex,
+    },
     end: (item, monitor) => {
       if (!monitor.didDrop()) {
         return
@@ -21,8 +24,8 @@ function CopyButton({ id, ...restProps }) {
 
       dispatch({
         type: 'copy',
-        sourceIndex: item.id,
-        targetIndex: dropResult.id,
+        sourceIndex: item.index,
+        targetIndex: dropResult.index,
       });
     },
     collect: (monitor) => ({

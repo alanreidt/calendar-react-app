@@ -3,11 +3,11 @@ import { useDrop } from 'react-dnd';
 
 import { Types } from '../utils/constants';
 
-function DayTab({ id, text }) {
+function DayTab({ dayIndex, text }) {
   const [, dropRef] = useDrop({
     accept: Types.LIST,
     drop: (item, monitor) => ({
-      id,
+      index: dayIndex,
     }),
   });
 

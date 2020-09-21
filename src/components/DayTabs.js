@@ -26,26 +26,26 @@ function DayTabs({ weekTasks, dayNames, todayDayIndex }) {
 
   return (
     <Tabs defaultActiveKey={String(todayDayIndex)} tabPosition="right" centered>
-      {dayNames.map((dayName, index) => {
-        const dayTasks = weekTasks[index];
+      {dayNames.map((dayName, dayIndex) => {
+        const dayTasks = weekTasks[dayIndex];
 
         return (
-          <TabPane style={{ padding: 0, }} tab={<DayTab id={index} text={dayName} />} key={index}>
+          <TabPane style={{ padding: 0, }} tab={<DayTab dayIndex={dayIndex} text={dayName} />} key={dayIndex}>
             <Container maxWidth="sm">
               <Box>
                 <Space data-flip-root-id={FLIP_ROOT_ID} direction="vertical" size="large">
                   <div style={{ textAlign: 'right' }}>
                     <CopyButton
-                      id={index}
+                      dayIndex={dayIndex}
                     />
                   </div>
                   <TaskList
-                    id={index}
+                    dayIndex={dayIndex}
                     initialTasks={dayTasks}
                     now={now}
                   />
                   <TaskPanel
-                    id={index}
+                    dayIndex={dayIndex}
                   />
                 </Space>
               </Box>
