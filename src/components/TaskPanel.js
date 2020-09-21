@@ -52,7 +52,7 @@ function TaskPanel({ dayIndex }) {
                   );
                 })}
 
-                {fields.length <= 0 &&
+                {fields.length <= 0 && (
                   <Form.Item>
                     <Button
                       type="dashed"
@@ -68,7 +68,7 @@ function TaskPanel({ dayIndex }) {
                       <PlusOutlined /> Add field
                     </Button>
                   </Form.Item>
-                }
+                )}
               </div>
             );
           }}
