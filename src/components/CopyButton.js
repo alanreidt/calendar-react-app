@@ -24,8 +24,10 @@ function CopyButton({ dayIndex, ...restProps }) {
 
       dispatch({
         type: 'copy',
-        sourceIndex: item.index,
-        targetIndex: dropResult.index,
+        payload: {
+          sourceIndex: item.index,
+          targetIndex: dropResult.index,
+        },
       });
     },
     collect: (monitor) => ({

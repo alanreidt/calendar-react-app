@@ -21,8 +21,10 @@ function TaskList({ initialTasks = [], dayIndex, now }) {
 
     dispatch({
       type: 'update',
-      payload: sortedTasks,
-      dayIndex,
+      payload: {
+        dayIndex,
+        dayTasks: sortedTasks,
+      },
     });
   };
 

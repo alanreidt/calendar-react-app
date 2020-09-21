@@ -13,8 +13,10 @@ function TaskPanel({ dayIndex }) {
   const handleFinish = ({ tasks }) => {
     dispatch({
       type: 'add',
-      dayIndex,
-      payload: tasks,
+      payload: {
+        dayIndex,
+        dayTasks: tasks,
+      },
     });
 
     form.resetFields();
