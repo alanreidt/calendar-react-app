@@ -71,8 +71,9 @@ const populateWeekTasks = () => {
 };
 const getWeekTasks = () => {
   const localStorageItem = localStorage.getItem(LOCAL_STORAGE_ITEM_NAME);
+  const weekTasks = localStorageItem && localStorageItem.weekTasks;
 
-  return (localStorageItem && localStorageItem.weekTasks) || populateWeekTasks();
+  return weekTasks || populateWeekTasks();
 };
 
 export {
