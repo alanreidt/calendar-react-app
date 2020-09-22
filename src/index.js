@@ -2,15 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
 
-import { WEEK_TASKS, DAY_NAMES, todayDayIndex, TIME_FORMAT } from './utils/constants';
+import { DAY_NAMES, todayDayIndex, TIME_FORMAT } from './utils/constants';
+import { getWeekTasks } from './utils/helpers';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 
 const weekTasks = JSON.parse(
-  WEEK_TASKS,
-  (key, value) => key === 'date' ? moment(value, TIME_FORMAT) : value
+  getWeekTasks(),
+  (key, value) => key === 'date' ? moment(value, TIME_FORMAT) : value,
 );
 
 ReactDOM.render(

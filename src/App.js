@@ -5,7 +5,7 @@ import { FlipProvider } from 'react-easy-flip';
 import { Container } from '@material-ui/core';
 
 import { weekTasksReducer, getTime } from './utils/helpers';
-import { WeekTasksDispatch } from './utils/constants';
+import { LOCAL_STORAGE_ITEM_NAME, WeekTasksDispatch } from './utils/constants';
 import DayTabs from './components/DayTabs';
 
 import './App.css';
@@ -14,8 +14,8 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
   const [weekTasks, dispatch] = useReducer(weekTasksReducer, initialWeekTasks);
 
   useEffect(() => {
-    localStorage.setItem('weekTasks', JSON.stringify(
-      weekTasks,
+    localStorage.setItem(LOCAL_STORAGE_ITEM_NAME, JSON.stringify(
+      { weekTasks },
       (key, value) => key === 'date' ? getTime(value) : value
     ));
   });

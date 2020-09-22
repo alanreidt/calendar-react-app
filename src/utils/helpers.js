@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 
-import { TIME_FORMAT } from './constants';
+import { LOCAL_STORAGE_ITEM_NAME, TIME_FORMAT } from './constants';
 
 // source: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 function useInterval(callback, delay) {
@@ -64,6 +64,17 @@ const getTime = (date) => (
     : date
 );
 
+const populateWeekTasks = () => {
+  const DAYS_IN_WEEK = 7;
+
+  return JSON.stringify(Array(DAYS_IN_WEEK).fill([]));
+};
+const getWeekTasks = () => {
+  const localStorageItem = localStorage.getItem(LOCAL_STORAGE_ITEM_NAME);
+
+  return (localStorageItem && localStorageItem.weekTasks) || populateWeekTasks();
+};
+
 export {
   useInterval,
   weekTasksReducer,
@@ -73,4 +84,5 @@ export {
   getTodayDayIndex,
   normalizeDate,
   checkIsDateExpiredBy,
+  getWeekTasks,
 };
