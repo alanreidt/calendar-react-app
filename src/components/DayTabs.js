@@ -43,7 +43,7 @@ function DayTabs({ weekTasks, dayNames, todayDayIndex }) {
                   <TaskList
                     dayIndex={dayIndex}
                     initialTasks={dayTasks}
-                    now={now}
+                    taskDueDate={now}
                   />
                   <TaskPanel
                     dayIndex={dayIndex}

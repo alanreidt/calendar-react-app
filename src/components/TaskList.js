@@ -7,7 +7,7 @@ import { checkIsDateExpiredBy, normalizeDate } from '../utils/helpers';
 import { WeekTasksDispatch } from '../utils/constants';
 import Task from './Task';
 
-function TaskList({ initialTasks = [], dayIndex, now }) {
+function TaskList({ initialTasks = [], dayIndex, taskDueDate }) {
   const dispatch = useContext(WeekTasksDispatch);
   const [form] = Form.useForm();
 
@@ -39,7 +39,7 @@ function TaskList({ initialTasks = [], dayIndex, now }) {
     }, 0);
   }
 
-  const checkIsDateExpired = checkIsDateExpiredBy(now);
+  const checkIsDateExpired = checkIsDateExpiredBy(taskDueDate);
 
   return (
     <div className="TaskList">
