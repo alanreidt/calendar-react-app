@@ -70,8 +70,7 @@ const populateWeekTasks = () => {
   return JSON.stringify(Array(DAYS_IN_WEEK).fill([]));
 };
 const getWeekTasks = () => {
-  const localStorageItem = localStorage.getItem(LOCAL_STORAGE_ITEM_NAME);
-  const weekTasks = localStorageItem && localStorageItem.weekTasks;
+  const weekTasks = localStorage.getItem(LOCAL_STORAGE_ITEM_NAME);
 
   return weekTasks || populateWeekTasks();
 };

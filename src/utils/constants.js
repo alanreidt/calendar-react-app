@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { getTodayDayIndex } from './helpers';
 
-const LOCAL_STORAGE_ITEM_NAME = 'alanreidt-calendar-app';
+const LOCAL_STORAGE_ITEM_NAME = 'weekTasks';
 const DAY_NAMES = [
   'Пн',
   'Вт',

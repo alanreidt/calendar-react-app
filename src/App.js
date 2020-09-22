@@ -15,7 +15,7 @@ function App({ initialWeekTasks = [], dayNames, todayDayIndex }) {
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_ITEM_NAME, JSON.stringify(
-      { weekTasks },
+      weekTasks,
       (key, value) => key === 'date' ? getTime(value) : value
     ));
   });
