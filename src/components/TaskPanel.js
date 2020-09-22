@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Form, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
-import { generateID } from '../utils/helpers';
+import { generateId } from '../utils/helpers';
 import { WeekTasksDispatch } from '../utils/constants';
 import Task from './Task';
 
@@ -62,7 +62,7 @@ function TaskPanel({ dayIndex }) {
                         add({
                           name: '',
                           date: '',
-                          id: generateID(),
+                          id: generateId(),
                         });
                       }}
                       block

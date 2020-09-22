@@ -25,7 +25,7 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-const createNewDayTasks = (dayTasks, newDayTasks) => (
+const composeNewDayTasks = (dayTasks, newDayTasks) => (
   [...dayTasks, ...newDayTasks].sort((a, b) => a.date - b.date)
 );
 
@@ -46,18 +46,18 @@ function weekTasksReducer(state, action) {
     case 'add':
       return state.map(
         (dayTasks, dayIndex) => dayIndex === action.payload.dayIndex
-          ? createNewDayTasks(dayTasks, action.payload.dayTasks)
+          ? composeNewDayTasks(dayTasks, action.payload.dayTasks)
           : dayTasks
       );
     default:
   }
 }
 
-const generateID = (index) => uuid();
+const generateId = (index) => uuid();
 const generateNameByIndex = (index) => (name) => index !== undefined ? [index, name] : name;
 const getTodayDayIndex = () => moment().isoWeekday() - 1;
 const normalizeDate = (date, dayIndex) => moment(date).add(dayIndex - getTodayDayIndex(), 'd');
-const checkIsDateExpired = (now) => (date) => date < now;
+const checkIsDateExpiredBy = (expirationDate) => (date) => date < expirationDate;
 const getTime = (date) => (
   moment(date).isValid()
     ? moment(date).format(TIME_FORMAT)
@@ -66,12 +66,11 @@ const getTime = (date) => (
 
 export {
   useInterval,
-  createNewDayTasks,
   weekTasksReducer,
   getTime,
-  generateID,
+  generateId,
   generateNameByIndex,
   getTodayDayIndex,
   normalizeDate,
-  checkIsDateExpired,
+  checkIsDateExpiredBy,
 };
