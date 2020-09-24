@@ -37,7 +37,7 @@ function CopyButton({ dayIndex, ...restProps }) {
 
   return (
     <Button ref={dragRef} style={{ opacity }} {...restProps}>
-      <CopyOutlined />
+      <CopyOutlined /> Copy
     </Button>
   );
 }

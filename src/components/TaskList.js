@@ -56,12 +56,14 @@ function TaskList({ initialTasks = [], dayIndex, taskDueDate }) {
               <div>
                 {fields.map((field, index) => {
                   const taskID = initialTasks[index].id;
-                  const minusCircleOutlined = (
-                    <MinusCircleOutlined
-                      onClick={() => {
-                        handleRemove(index, remove);
-                      }}
-                    />
+                  const removeButton = (
+                    <Button title="remove">
+                      <MinusCircleOutlined
+                        onClick={() => {
+                          handleRemove(index, remove);
+                        }}
+                      />
+                    </Button>
                   );
 
                   return (
@@ -72,7 +74,7 @@ function TaskList({ initialTasks = [], dayIndex, taskDueDate }) {
                       expired={checkIsDateExpired(
                         normalizeDate(initialTasks[index].date, dayIndex)
                       )}
-                      button={minusCircleOutlined}
+                      button={removeButton}
                     />
                   )
                 })}

@@ -57,7 +57,6 @@ function TaskPanel({ dayIndex }) {
                 {fields.length <= 0 && (
                   <Form.Item>
                     <Button
-                      type="dashed"
                       onClick={() => {
                         add({
                           name: '',
