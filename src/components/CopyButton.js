@@ -35,9 +35,14 @@ function CopyButton({ dayIndex, ...restProps }) {
     }),
   });
 
+  const style = {
+    opacity,
+    cursor: 'grab',
+  };
+
   return (
-    <Button ref={dragRef} style={{ opacity }} {...restProps}>
-      <CopyOutlined /> Copy
+    <Button ref={dragRef} style={style} {...restProps}>
+      <CopyOutlined /> Copy to
     </Button>
   );
 }
