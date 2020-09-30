@@ -1,16 +1,17 @@
 # calendar-react-app
 A calendar, that helps you to describe your week schedule.
 
-Realization of the [calendar single page application](https://drive.google.com/file/d/1vlU_rxq_rifu6zqdm1ydGLX9ROdWlQar/view?usp=sharing).
-
-This app has brought up several challenges:
-- It required consideration of how to store task's date, 'cause tasks could be copied between days;
-- In the context of state, it required to separate global state from the local ones correctly, and to place the local state in the right component;
-- Components required consideration too — there are several of them that are much alike, therefore they should represent a single unit;
-
 [Demo-page](https://alanreidt.github.io/calendar-react-app/)
 
+This app has brought up several challenges:
+- It required consideration of how to store a task's date, 'cause tasks could be copied between days;
+- In the context of state, it required to separate global state from local ones correctly, and to place the local state in the right component;
+- Components required consideration too — there are several of them that are much alike, therefore they should represent a single unit;
+
 Was realized as a part of [AGIMA](https://www.agima.ru/) Frontend Developer test tasks.
+
+**Requirements**:
+- [requirements in Russian](https://drive.google.com/file/d/1vlU_rxq_rifu6zqdm1ydGLX9ROdWlQar/view?usp=sharing).
 
 ## Aimed skills:
 - React,
@@ -51,4 +52,4 @@ The possible actions are: `add`, `remove`, `copy` and `update`. They are pretty 
 ## Possible improvements
 There is a mistake in handling of data — `weekTasks` object is different with its version in a local storage at some point in time.
 
-AntDesign form component causing trouble with the sorting animation of a tasks list. So, its replacement should solve the problem
+AntDesign form component causing trouble with the sorting animation of a tasks list. So, its replacement should solve the problem.
